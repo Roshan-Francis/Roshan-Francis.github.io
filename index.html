@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roshan Francis | Backend developer</title>
+<meta name="description" content="Personal site of Roshan Francis, a computer science student in Thiruvananthapuram who builds backend services and AI-powered APIs with Python and FastAPI.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1c1c1e;
+    --muted: #5f6368;
+    --line: #e4e4e7;
+    --soft: #f5f5f6;
+    --link: #0a58ca;
+    --live: #1a7f4b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121214;
+      --text: #ececee;
+      --muted: #a1a1aa;
+      --line: #2e2e33;
+      --soft: #1b1b1f;
+      --link: #7ab2ff;
+      --live: #5fcb95;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 20px; }
+  a { color: var(--link); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; border-radius: 4px; }
+  p { margin: 0 0 14px; }
+
+  /* Top bar */
+  .topbar { border-bottom: 1px solid var(--line); }
+  .topbar .wrap { display: flex; align-items: center; gap: 22px; min-height: 56px; }
+  .topbar .name { font-weight: 700; color: var(--text); text-decoration: none; margin-right: auto; }
+  .topbar a.nav { color: var(--muted); text-decoration: none; }
+  .topbar a.nav:hover { color: var(--text); text-decoration: underline; }
+
+  /* Hero */
+  .hero { padding: 48px 0 8px; }
+  .hero-row { display: flex; align-items: center; gap: 28px; }
+  .photo {
+    width: 128px; height: 128px; flex: none;
+    border-radius: 50%; object-fit: cover; border: 1px solid var(--line);
+  }
+  h1 { font-size: 2.2rem; line-height: 1.15; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .where { color: var(--muted); margin: 0; }
+  .blurb { margin-top: 24px; max-width: 38rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
+  .links a {
+    display: inline-block; padding: 7px 16px; border: 1px solid var(--line); border-radius: 999px;
+    color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.98rem;
+  }
+  .links a:hover { background: var(--soft); }
+
+  /* Sections */
+  section { padding: 44px 0 0; }
+  h2 { font-size: 1.5rem; margin: 0 0 18px; letter-spacing: -0.01em; }
+
+  /* Work / education tabs */
+  .tabs { display: flex; gap: 8px; margin-bottom: 26px; }
+  .tab {
+    font: inherit; font-weight: 600; cursor: pointer;
+    padding: 6px 18px; border-radius: 999px;
+    border: 1px solid var(--line); background: transparent; color: var(--muted);
+  }
+  .tab[aria-selected="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .js .panel[hidden] { display: none; }
+  .no-js-label { display: none; }
+  html:not(.js) .no-js-label { display: block; font-weight: 700; margin: 0 0 14px; }
+  html:not(.js) .tabs { display: none; }
+  html:not(.js) .panel { margin-bottom: 30px; }
+
+  .entry { display: flex; gap: 16px; margin-bottom: 30px; }
+  .badge {
+    flex: none; width: 42px; height: 42px; border-radius: 10px;
+    background: var(--soft); border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem; color: var(--muted);
+  }
+  .entry h3 { font-size: 1.1rem; margin: 0; line-height: 1.4; }
+  .role { font-weight: 600; margin: 8px 0 0; }
+  .dates { color: var(--muted); font-size: 0.95rem; margin: 0 0 6px; }
+  .entry ul { margin: 0; padding-left: 1.15rem; }
+  .entry li { margin-bottom: 6px; }
+  .entry p.plain { margin: 0 0 6px; }
+
+  /* Projects */
+  .project {
+    border: 1px solid var(--line); border-radius: 12px; padding: 22px 22px 18px; margin-bottom: 18px;
+  }
+  .project h3 { font-size: 1.2rem; margin: 0 0 4px; }
+  .status { font-size: 0.9rem; color: var(--muted); margin: 0 0 10px; }
+  .status.live { color: var(--live); font-weight: 600; }
+  .project p.desc { margin: 0 0 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; padding: 0; list-style: none; }
+  .chips li {
+    font-size: 0.85rem; padding: 2px 10px; border-radius: 999px;
+    background: var(--soft); border: 1px solid var(--line); color: var(--muted);
+  }
+  .project .actions { display: flex; gap: 18px; font-weight: 500; margin: 0; }
+
+  /* Skills */
+  dl.skills { margin: 0; }
+  dl.skills .row { display: grid; grid-template-columns: 11rem 1fr; gap: 2px 20px; padding: 12px 0; border-top: 1px solid var(--line); }
+  dl.skills .row:first-child { border-top: 0; padding-top: 0; }
+  dl.skills dt { font-weight: 600; }
+  dl.skills dd { margin: 0; }
+
+  footer { margin-top: 64px; border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 0.95rem; }
+
+  @media (max-width: 560px) {
+    .hero { padding-top: 32px; }
+    .hero-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .photo { width: 108px; height: 108px; }
+    h1 { font-size: 1.9rem; }
+    .topbar .wrap { gap: 16px; }
+    dl.skills .row { grid-template-columns: 1fr; }
+    .project { padding: 18px 16px 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="name" href="#top">Roshan Francis</a>
+    <a class="nav" href="#work">work</a>
+    <a class="nav" href="#projects">projects</a>
+    <a class="nav" href="#contact">contact</a>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+
+  <div class="hero">
+    <div class="hero-row">
+      <img class="photo" src="photo.png" width="128" height="128" alt="Photo of Roshan Francis">
+      <div>
+        <h1>hi, i'm roshan. 👋</h1>
+        <p class="where">Computer science student from Kattakada, Trivandrum 🇮🇳</p>
+      </div>
+    </div>
+    <p class="blurb">I'm a final-year student who likes backend work. I build APIs and AI-powered services, mostly in Python with FastAPI. I like APIs because the input and output are clear, so I can focus on the logic. When I'm not coding, I play football as a midfielder and read manhwas.</p>
+    <p class="blurb" style="margin-top:0">I'm looking for a junior developer role.</p>
+    <ul class="links">
+      <li><a href="Roshan_Francis_Resume.pdf" download>Download resume</a></li>
+      <li><a href="mailto:fbiju213@gmail.com">Email</a></li>
+      <li><a href="https://github.com/Roshan-Francis">GitHub</a></li>
+    </ul>
+  </div>
+
+  <section id="work">
+    <div class="tabs" role="tablist" aria-label="Work or education">
+      <button class="tab" role="tab" id="tab-work" aria-selected="true" aria-controls="panel-work" type="button">Work</button>
+      <button class="tab" role="tab" id="tab-edu" aria-selected="false" aria-controls="panel-edu" type="button" tabindex="-1">Education</button>
+    </div>
+
+    <div class="panel" id="panel-work" role="tabpanel" aria-labelledby="tab-work">
+      <p class="no-js-label">Work</p>
+
+      <div class="entry">
+        <div class="badge" aria-hidden="true">IE</div>
+        <div>
+          <h3>IEEE EMBS Kerala Chapter and MBCET</h3>
+          <p class="role">Assistive Technology Intern</p>
+          <p class="dates">June 2025, Thiruvananthapuram</p>
+          <ul>
+            <li>Completed an 11-day internship on how technology can help people with physical and cognitive disabilities.</li>
+            <li>Designed and built prototype IR-sensor glasses that help children with autism manage personal space. A red light turns on when someone crosses a set distance.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="badge" aria-hidden="true">IC</div>
+        <div>
+          <h3>ICT Academy of Kerala</h3>
+          <p class="role">Flutter App Development Intern</p>
+          <p class="dates">December 2024 to January 2025, Thiruvananthapuram</p>
+          <ul>
+            <li>Completed a one-month program on cross-platform apps with Flutter and Dart, covering UI design and state management.</li>
+            <li>Built <a href="https://github.com/Roshan-Francis/hangman">a Hangman word game</a> with a team of four, with random words, animations and high scores saved on the device.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-edu" role="tabpanel" aria-labelledby="tab-edu" hidden>
+      <p class="no-js-label">Education</p>
+
+      <div class="entry">
+        <div class="badge" aria-hidden="true">MB</div>
+        <div>
+          <h3>Mar Baselios College of Engineering and Technology</h3>
+          <p class="role">B.Tech in Computer Science and Engineering</p>
+          <p class="dates">2023 to 2027</p>
+          <ul>
+            <li>CGPA 8.26.</li>
+            <li>Smart India Hackathon 2025: cleared the internal college round with Team Hackonauts and moved into the national-level hackathon pool.</li>
+            <li>IoT Forensics bootcamp by C-DAC and MBCET (ISEA Project, MeitY), December 2025. Covered device data extraction, packet analysis, hex-level data recovery and IoT security analysis.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="badge" aria-hidden="true">SN</div>
+        <div>
+          <h3>Shanthinikethan School</h3>
+          <p class="role">Class X and Class XII (CBSE)</p>
+          <p class="dates">Thiruvananthapuram</p>
+          <ul>
+            <li>Class XII: 78% in 2023.</li>
+            <li>Class X: 89.6% in 2021.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>featured projects</h2>
+
+    <article class="project">
+      <h3>Resume Scoring API</h3>
+      <p class="status live">Live</p>
+      <p class="desc">Scores a resume PDF against a job description from 0 to 100. It returns a match label, the detected CGPA, CGPA warnings and personalized improvement tips. The score combines keyword matching with synonyms (30), semantic similarity with Qwen3-Embedding-0.6B (30), experience signals (25) and achievements (15).</p>
+      <ul class="chips" aria-label="Technologies">
+        <li>Python</li><li>FastAPI</li><li>sentence-transformers</li><li>Docker</li><li>Hugging Face Spaces</li><li>Streamlit</li>
+      </ul>
+      <p class="actions">
+        <a href="https://roshfr-resume-v2.hf.space">Live API</a>
+        <a href="https://github.com/Roshan-Francis/Resume_checker_api">Source</a>
+      </p>
+    </article>
+
+    <article class="project">
+      <h3>HOWL</h3>
+      <p class="status">In progress</p>
+      <p class="desc">A safety system for groups of motorcycle riders. I'm the backend developer: I built the FastAPI REST APIs behind the Flutter app, designed the Supabase PostgreSQL database, set up Google login with Supabase Auth and added Mapbox maps and location. The hardware uses ESP32 and LoRa, with an offline LoRa mesh fallback so alerts still reach the group without a network.</p>
+      <ul class="chips" aria-label="Technologies">
+        <li>FastAPI</li><li>PostgreSQL</li><li>Supabase</li><li>Mapbox</li><li>Flutter</li><li>ESP32</li><li>LoRa</li>
+      </ul>
+    </article>
+
+    <article class="project">
+      <h3>NextStep</h3>
+      <p class="status">Team of 4, February to April 2026</p>
+      <p class="desc">A college placement management system with a React frontend on Vercel, a Supabase PostgreSQL backend and Google sign-in. I connected my Resume Scoring API as the platform's AI microservice to score student resumes against job requirements, and I wrote the data flow diagrams and architecture documentation.</p>
+      <ul class="chips" aria-label="Technologies">
+        <li>React</li><li>Vercel</li><li>Supabase</li><li>PostgreSQL</li><li>FastAPI</li>
+      </ul>
+    </article>
+
+    <article class="project">
+      <h3>SwiftVision</h3>
+      <p class="status">February to April 2025</p>
+      <p class="desc">A face recognition attendance system. A Flutter app with Google Sign-In registers students and marks attendance from a photo. The Flask backend detects faces with MTCNN and OpenCV, matches them against registered students and saves attendance in both MySQL and Firestore.</p>
+      <ul class="chips" aria-label="Technologies">
+        <li>Flutter</li><li>Flask</li><li>OpenCV</li><li>MTCNN</li><li>MySQL</li><li>Firestore</li>
+      </ul>
+      <p class="actions"><a href="https://github.com/Roshan-Francis/swiftvision">Source</a></p>
+    </article>
+
+    <article class="project">
+      <h3>Student Result Management System</h3>
+      <p class="status">Academic project</p>
+      <p class="desc">A Java Swing desktop app backed by MySQL. Teachers enter and manage marks, and students view their results with pass or fail status.</p>
+      <ul class="chips" aria-label="Technologies">
+        <li>Java</li><li>Swing</li><li>MySQL</li>
+      </ul>
+      <p class="actions"><a href="https://github.com/Roshan-Francis/java-project">Source</a></p>
+    </article>
+  </section>
+
+  <section id="skills">
+    <h2>what i work with</h2>
+    <dl class="skills">
+      <div class="row"><dt>Languages</dt><dd>Python (intermediate). Java, C and SQL (beginner).</dd></div>
+      <div class="row"><dt>Frameworks</dt><dd>FastAPI, Flask, Flutter, Java Swing, OpenCV, sentence-transformers</dd></div>
+      <div class="row"><dt>Databases</dt><dd>PostgreSQL, Supabase, MySQL, Firebase Firestore</dd></div>
+      <div class="row"><dt>Tools</dt><dd>Docker, Git, Hugging Face Spaces, Streamlit</dd></div>
+      <div class="row"><dt>Core topics</dt><dd>Data structures and algorithms, OOP, DBMS, REST API design</dd></div>
+    </dl>
+  </section>
+
+  <section id="contact">
+    <h2>get in touch</h2>
+    <p>The best way to reach me is by email at <a href="mailto:fbiju213@gmail.com">fbiju213@gmail.com</a>. You can also find my code on <a href="https://github.com/Roshan-Francis">GitHub</a> or <a href="Roshan_Francis_Resume.pdf" download>download my resume</a>.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Roshan Francis</div>
+</footer>
+
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  var panels = { "tab-work": document.getElementById("panel-work"), "tab-edu": document.getElementById("panel-edu") };
+  function select(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      panels[t.id].hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { select(t); });
+    t.addEventListener("keydown", function (e) {
+      var n = null;
+      if (e.key === "ArrowRight") n = tabs[(i + 1) % tabs.length];
+      if (e.key === "ArrowLeft") n = tabs[(i - 1 + tabs.length) % tabs.length];
+      if (n) { e.preventDefault(); n.focus(); select(n); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
